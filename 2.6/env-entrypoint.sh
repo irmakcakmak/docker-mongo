@@ -12,7 +12,7 @@ replication:
 
 EOF
 
-if ["z$KEY_FILE_CONTENT" != "z"]; then
+if [ "z$KEY_FILE_CONTENT" != "z" ]; then
   echo $KEY_FILE_CONTENT | tr ' ' '\n' > /etc/mongod-keyfile
   chmod 600 /etc/mongod-keyfile
   cat <<EOF >> /etc/mongod.conf
