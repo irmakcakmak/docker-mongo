@@ -1,5 +1,8 @@
 #!/bin/bash
 
+mkdir -p /data/db/$REPLICATION_SET_NAME/
+chown -R mongodb:mongodb /data/db/$REPLICATION_SET_NAME/
+
 cat <<EOF >/etc/mongod.conf
 storage:
   dbPath: /data/db/$REPLICATION_SET_NAME/
