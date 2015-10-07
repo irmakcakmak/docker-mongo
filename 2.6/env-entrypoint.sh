@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cat <<EOF >/etc/mongod.conf
 storage:
   dbPath: /data/db/$REPLICATION_SET_NAME/
