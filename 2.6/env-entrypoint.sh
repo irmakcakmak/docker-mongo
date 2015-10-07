@@ -9,8 +9,7 @@ replication:
 
 EOF
 
-if [$KEY_FILE_CONTENT != '']; then
-  mkdir -p /etc/mongod-keyfile
+if ["z$KEY_FILE_CONTENT" != "z"]; then
   echo $KEY_FILE_CONTENT | tr ' ' '\n' > /etc/mongod-keyfile
   chmod 600 /etc/mongod-keyfile
   cat <<EOF >> /etc/mongod.conf
