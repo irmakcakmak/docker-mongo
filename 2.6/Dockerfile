@@ -2,9 +2,12 @@ FROM mongo:2.6
 MAINTAINER erhankesken@gmail.com
 
 ENV REPLICATION_SET_NAME=rs-test \
-  KEY_FILE_CONTENT=""
+  NET_PORT="27017" \
+  KEY_FILE_CONTENT="" \
+  CONFIGSVR="false"
 
 COPY env-entrypoint.sh /env-entrypoint.sh
 RUN chmod +x /env-entrypoint.sh
 
 ENTRYPOINT ["/env-entrypoint.sh"]
+

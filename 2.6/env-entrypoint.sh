@@ -12,6 +12,20 @@ replication:
 
 EOF
 
+if [ "z$NET_PORT" != "z" ]; then
+  cat <<EOF >> /etc/mongod.conf
+net:
+   port: $NET_PORT
+EOF
+fi
+
+if [ "z$CONFIGSVR" != "ztrue" ]; then
+  cat <<EOF >> /etc/mongod.conf
+sharding:
+  clusterRole: configsvr
+EOF
+fi
+
 if [ "z$KEY_FILE_CONTENT" != "z" ]; then
   echo $KEY_FILE_CONTENT | tr ' ' '\n' > /etc/mongod-keyfile
   chmod 600 /etc/mongod-keyfile
