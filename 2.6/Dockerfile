@@ -3,6 +3,7 @@ MAINTAINER erhankesken@gmail.com
 
 ENV REPLICATION_SET_NAME=rs-test \
   NET_PORT="27017" \
+  SHARDING_CONFIGDB="" \
   KEY_FILE_CONTENT="" \
   CONFIGSVR="false"
 

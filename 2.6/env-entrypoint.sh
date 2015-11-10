@@ -1,9 +1,11 @@
 #!/bin/bash
 
+MONGO_CMD=mongod
 mkdir -p /data/db/$REPLICATION_SET_NAME/
 chown -R mongodb:mongodb /data/db/$REPLICATION_SET_NAME/
 
-cat <<EOF >/etc/mongod.conf
+if [ "z$REPLICATION_SET_NAME" != "z" ]; then
+  cat <<EOF >/etc/mongod.conf
 storage:
   dbPath: /data/db/$REPLICATION_SET_NAME/
 
@@ -11,18 +13,18 @@ replication:
   replSetName: $REPLICATION_SET_NAME
 
 EOF
+else
+  cat <<EOF >/etc/mongod.conf
+storage:
+  dbPath: /data/db/
+
+EOF
+fi
 
 if [ "z$NET_PORT" != "z" ]; then
   cat <<EOF >> /etc/mongod.conf
 net:
    port: $NET_PORT
-EOF
-fi
-
-if [ "z$CONFIGSVR" != "ztrue" ]; then
-  cat <<EOF >> /etc/mongod.conf
-sharding:
-  clusterRole: configsvr
 EOF
 fi
 
@@ -36,4 +38,20 @@ security:
 EOF
 fi
 
-/entrypoint.sh -f /etc/mongod.conf
+if [ "z$CONFIGSVR" != "ztrue" ]; then
+  cat <<EOF >> /etc/mongod.conf
+sharding:
+  clusterRole: configsvr
+EOF
+fi
+
+if [ "z$SHARDING_CONFIGDB" != "ztrue" ]; then
+  MONGO_CMD=mongos
+  cat <<EOF >> /etc/mongod.conf
+sharding:
+  configDB: $SHARDING_CONFIGDB
+EOF
+fi
+
+/entrypoint.sh $MONGO_CMD -f /etc/mongod.conf
+
