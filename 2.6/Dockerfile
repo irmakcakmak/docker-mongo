@@ -1,7 +1,7 @@
 FROM mongo:2.6
 MAINTAINER erhankesken@gmail.com
 
-ENV REPLICATION_SET_NAME=rs-test \
+ENV REPLICATION_SET_NAME="" \
   NET_PORT="27017" \
   SHARDING_CONFIGDB="" \
   KEY_FILE_CONTENT="" \
