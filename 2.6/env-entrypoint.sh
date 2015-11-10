@@ -38,14 +38,14 @@ security:
 EOF
 fi
 
-if [ "z$CONFIGSVR" != "ztrue" ]; then
+if [ "z$CONFIGSVR" = "ztrue" ]; then
   cat <<EOF >> /etc/mongod.conf
 sharding:
   clusterRole: configsvr
 EOF
 fi
 
-if [ "z$SHARDING_CONFIGDB" != "ztrue" ]; then
+if [ "z$SHARDING_CONFIGDB" = "ztrue" ]; then
   MONGO_CMD=mongos
   cat <<EOF >> /etc/mongod.conf
 sharding:
