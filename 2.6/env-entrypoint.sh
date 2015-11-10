@@ -45,7 +45,7 @@ sharding:
 EOF
 fi
 
-if [ "z$SHARDING_CONFIGDB" = "ztrue" ]; then
+if [ "z$SHARDING_CONFIGDB" != "z" ]; then
   MONGO_CMD=mongos
   cat <<EOF >> /etc/mongod.conf
 sharding:
