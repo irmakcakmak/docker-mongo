@@ -12,15 +12,15 @@ sharding:
 EOF
 else
 
-  if [ "z$STORAGE_MMAPV1_SMALLFILES" != "z" ]; then
-    STORAGE_MMAPV1_SMALLFILES="mmapv1.smallFiles: true"
+  if [ "z$STORAGE_SMALLFILES" != "z" ]; then
+    STORAGE_SMALLFILES="mmapv1.smallFiles: true"
   fi
 
   if [ "z$REPLICATION_SET_NAME" != "z" ]; then
     cat <<EOF >/etc/mongod.conf
 storage:
   dbPath: /data/db/$REPLICATION_SET_NAME/
-  $STORAGE_MMAPV1_SMALLFILES
+  $STORAGE_SMALLFILES
 
 replication:
   replSetName: $REPLICATION_SET_NAME
