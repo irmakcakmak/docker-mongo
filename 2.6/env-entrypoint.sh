@@ -13,7 +13,7 @@ EOF
 else
 
   if [ "z$STORAGE_SMALLFILES" != "z" ]; then
-    STORAGE_SMALLFILES="mmapv1.smallFiles: true"
+    STORAGE_SMALLFILES="smallFiles: true"
   fi
 
   if [ "z$REPLICATION_SET_NAME" != "z" ]; then
