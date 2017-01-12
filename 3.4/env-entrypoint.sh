@@ -38,6 +38,7 @@ else
     cat <<EOF >/etc/mongod.conf
 storage:
   dbPath: /data/db/$REPLICATION_SET_NAME/
+  $ENGINE
   $STORAGE_ENGINE
 
 replication:
@@ -48,6 +49,7 @@ EOF
     cat <<EOF >/etc/mongod.conf
 storage:
   dbPath: /data/db/
+  $ENGINE
   $STORAGE_ENGINE
 EOF
   fi
