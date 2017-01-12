@@ -6,7 +6,9 @@ ENV REPLICATION_SET_NAME="" \
     SHARDING_CONFIGDB="" \
     KEY_FILE_CONTENT="" \
     STORAGE_SMALLFILES="" \
-    CONFIGSVR="false"
+    CONFIGSVR="false" \
+    STORAGE_ENGINE="wiredTiger" \
+    MONGO_MEMORY=""
 
 COPY env-entrypoint.sh /env-entrypoint.sh
 RUN chmod +x /env-entrypoint.sh
