@@ -6,7 +6,8 @@ ENV REPLICATION_SET_NAME="" \
     SHARDING_CONFIGDB="" \
     KEY_FILE_CONTENT="" \
     STORAGE_SMALLFILES="" \
-    CONFIGSVR="false"
+    CONFIGSVR="false" \
+    MARATHON_APP_RESOURCE_MEM=""
 
 COPY env-entrypoint.sh /env-entrypoint.sh
 RUN chmod +x /env-entrypoint.sh
