@@ -7,6 +7,7 @@ ENV REPLICATION_SET_NAME="" \
     KEY_FILE_CONTENT="" \
     STORAGE_SMALLFILES="" \
     CONFIGSVR="false" \
+    STORAGE_ENGINE="wiredTiger" \
     MARATHON_APP_RESOURCE_MEM=""
 
 COPY env-entrypoint.sh /env-entrypoint.sh

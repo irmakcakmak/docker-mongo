@@ -1,8 +1,13 @@
 #!/bin/bash
-
+echo $MARATHON_APP_RESOURCE_MEM 
 MONGO_CMD=mongod
 mkdir -p /data/db/$REPLICATION_SET_NAME/
 chown -R mongodb:mongodb /data/db/$REPLICATION_SET_NAME/
+
+if [[ $MARATHON_APP_RESOURCE_MEM ]];then
+  CACHE_SIZE="cacheSizeGB: $[MARATHON_APP_RESOURCE_MEM-1024]"
+  echo '$MARATHON_APP_RESOURCE_MEM'
+fi
 
 if [ "z$SHARDING_CONFIGDB" != "z" ]; then
   MONGO_CMD=mongos
@@ -23,15 +28,15 @@ else
   fi
   echo "Storage engine is set to '$STORAGE_ENGINE'"
   ENGINE="engine: $STORAGE_ENGINE"
-  if [[ $STORAGE_ENGINE == 'mmapv1' ]]; then
+  if [[ $STORAGE_ENGINE == "mmapv1" ]]; then
     STORAGE_ENGINE="$STORAGE_ENGINE:
-                      $STORAGE_SMALLFILES"
+      $STORAGE_SMALLFILES"
   else
     STORAGE_ENGINE="$STORAGE_ENGINE:
-                      engineConfig:
-                      cacheSizeGB: $[MONGO_MEMORY/2-1024]
-                      journalCompressor: snappy
-                      directoryForIndexes: false"
+      engineConfig: 
+        journalCompressor: snappy
+        directoryForIndexes: false
+        $CACHE_SIZE"
   fi
 
   if [ "z$REPLICATION_SET_NAME" != "z" ]; then
