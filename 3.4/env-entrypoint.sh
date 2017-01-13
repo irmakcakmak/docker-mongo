@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo $MARATHON_APP_RESOURCE_MEM 
 MONGO_CMD=mongod
 mkdir -p /data/db/$REPLICATION_SET_NAME/
 chown -R mongodb:mongodb /data/db/$REPLICATION_SET_NAME/
@@ -36,8 +36,7 @@ else
       engineConfig: 
         journalCompressor: snappy
         directoryForIndexes: false
-        $CACHE_SIZE
-"
+        $CACHE_SIZE"
   fi
 
   if [ "z$REPLICATION_SET_NAME" != "z" ]; then
