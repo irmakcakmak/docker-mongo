@@ -1,12 +1,12 @@
 #!/bin/bash
-echo $MARATHON_APP_RESOURCE_MEM 
+echo $MONGO_MEMORY 
 MONGO_CMD=mongod
 mkdir -p /data/db/$REPLICATION_SET_NAME/
 chown -R mongodb:mongodb /data/db/$REPLICATION_SET_NAME/
 
-if [[ $MARATHON_APP_RESOURCE_MEM ]];then
-  CACHE_SIZE="cacheSizeGB: $[MARATHON_APP_RESOURCE_MEM-1024]"
-  echo '$MARATHON_APP_RESOURCE_MEM'
+if [[ $MONGO_MEMORY ]];then
+  CACHE_SIZE="cacheSizeGB: $[MONGO_MEMORY-1024]"
+  echo '$CACHE_SIZE'
 fi
 
 if [ "z$SHARDING_CONFIGDB" != "z" ]; then
