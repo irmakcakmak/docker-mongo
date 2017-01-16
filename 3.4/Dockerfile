@@ -8,7 +8,7 @@ ENV REPLICATION_SET_NAME="" \
     STORAGE_SMALLFILES="" \
     CONFIGSVR="false" \
     STORAGE_ENGINE="wiredTiger" \
-    MARATHON_APP_RESOURCE_MEM=""
+    MONGO_MEMORY=""
 
 COPY env-entrypoint.sh /env-entrypoint.sh
 RUN chmod +x /env-entrypoint.sh
