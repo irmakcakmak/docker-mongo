@@ -4,9 +4,12 @@ MONGO_CMD=mongod
 mkdir -p /data/db/$REPLICATION_SET_NAME/
 chown -R mongodb:mongodb /data/db/$REPLICATION_SET_NAME/
 
-if [[ $MONGO_MEMORY ]];then
-  CACHE_SIZE="cacheSizeGB: $[MONGO_MEMORY/2-1024]"
-  echo '$CACHE_SIZE'
+if [[ $MONGO_MEMORY ]]; then
+  if (( "$MONGO_MEMORY" > 2048 )); then
+    CACHE_SIZE="cacheSizeGB: $[(MONGO_MEMORY-1024)/1024]"
+  else
+    CACHE_SIZE="cacheSizeGB: 0.5"
+  fi
 fi
 
 if [ "z$SHARDING_CONFIGDB" != "z" ]; then
