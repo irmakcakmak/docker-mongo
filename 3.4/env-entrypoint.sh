@@ -5,7 +5,7 @@ mkdir -p /data/db/$REPLICATION_SET_NAME/
 chown -R mongodb:mongodb /data/db/$REPLICATION_SET_NAME/
 
 if [[ $MONGO_MEMORY ]];then
-  CACHE_SIZE="cacheSizeGB: $[MONGO_MEMORY-1024]"
+  CACHE_SIZE="cacheSizeGB: $[MONGO_MEMORY/2-1024]"
   echo '$CACHE_SIZE'
 fi
 
