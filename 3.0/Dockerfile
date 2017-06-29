@@ -1,4 +1,4 @@
-FROM mongo:3.4.5
+FROM mongo:3.0.15
 MAINTAINER irmak@fastmail.com
 
 ENV REPLICATION_SET_NAME="" \
