@@ -8,7 +8,8 @@ ENV REPLICATION_SET_NAME="" \
     STORAGE_SMALLFILES="" \
     CONFIGSVR="false" \
     STORAGE_ENGINE="wiredTiger" \
-    MONGO_MEMORY=""
+    MONGO_MEMORY="" \
+    ARBITER="false"
 
 COPY env-entrypoint.sh /env-entrypoint.sh
 RUN chmod +x /env-entrypoint.sh

@@ -4,6 +4,11 @@ MONGO_CMD=mongod
 mkdir -p /data/db/$REPLICATION_SET_NAME/
 chown -R mongodb:mongodb /data/db/$REPLICATION_SET_NAME/
 
+JOURNAL_ENABLED=true
+if [[ "$ARBITER" = "true" ]]; then
+    JOURNAL_ENABLED=false
+fi
+
 if [[ $MONGO_MEMORY ]]; then
   if (( "$MONGO_MEMORY" > 2048 )); then
     CACHE_SIZE="cacheSizeGB: $[(MONGO_MEMORY-1024)/1024]"
@@ -45,6 +50,8 @@ else
   if [ "z$REPLICATION_SET_NAME" != "z" ]; then
     cat <<EOF >/etc/mongod.conf
 storage:
+  journal:
+    enabled: $JOURNAL_ENABLED
   dbPath: /data/db/$REPLICATION_SET_NAME/
   $ENGINE
   $STORAGE_ENGINE
